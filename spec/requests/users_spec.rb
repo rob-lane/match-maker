@@ -2,9 +2,12 @@ require 'spec_helper'
 
 describe "Web user" do
   
-  it "navigates to root URL" do
-    visit root_path
-    response.should redirect_to(new_sessions_path)
+  describe "navigating to the root URL" do
+  
+    it "should be redirected to the login page" do
+      visit root_path
+      response.should have_selector("div#error_explanation")
+    end
   end
   
   describe "registration" do
@@ -23,7 +26,6 @@ describe "Web user" do
           end
           click_button
           response.should have_selector("div.flash.success", :content => "Welcome")
-          response.should redirect_to(root_path)
         }.should change(User, :count)
       end
     end
@@ -36,7 +38,6 @@ describe "Web user" do
             fill_in field, :with => ""
           end
           click_button
-          response.should render_template('users/new')
           response.should have_selector("div#error_explanation")
         }.end should_not change(User, :count)
       end  

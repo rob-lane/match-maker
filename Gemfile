@@ -11,6 +11,6 @@ end
 
 group :test do
   gem 'rspec-rails', '~> 2.0'
-  gem 'capybara'
+  gem 'capybara', '1.1.2'
 end
 gem 'jquery-rails'
